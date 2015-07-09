@@ -351,8 +351,10 @@
 - (CGFloat)cellHeightForObject:(id)object indexPath:(NSIndexPath *)indexPath cellReuseIdentifier:(NSString *)reuseIdentifier
 {
     NSParameterAssert(indexPath);
-
-    NSNumber * height = [self.cellSizeCache objectForKey:indexPath];
+    
+    NSString *key = [NSString stringWithFormat:@"%lu", (unsigned long)[object hash]];
+    
+    NSNumber * height = [self.cellSizeCache objectForKey:key];
     if (height == nil)
     {
         RZCellSizeManagerCellConfiguration* configuration = [self configurationForObject:object reuseIdentifier:reuseIdentifier];
@@ -361,7 +363,7 @@
         
         if (height)
         {
-            [self.cellSizeCache setObject:height forKey:indexPath];
+            [self.cellSizeCache setObject:height forKey:key];
         }
     }
     return [height floatValue];
