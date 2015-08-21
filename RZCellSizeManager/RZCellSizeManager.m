@@ -352,7 +352,7 @@
 {
     NSParameterAssert(indexPath);
     
-    NSString *key = [NSString stringWithFormat:@"%lu", (unsigned long)[object hash]];
+    NSString *key = [NSString stringWithFormat:@"%@_%lu", reuseIdentifier, (unsigned long)[object hash]];
     
     NSNumber * height = [self.cellSizeCache objectForKey:key];
     if (height == nil)
